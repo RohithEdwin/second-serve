@@ -292,15 +292,6 @@ app.post("/donor/:id",
         res.redirect("/donor/index");
 });
 
-app.delete("/donor/delete/:id",
-    setCurrentUser, isLoggedIn,
-    async(req,res) => {
-        const { id } = req.params;
-        await Donor.findByIdAndDelete(id);
-        req.flash('success', 'Account deleted successfully');
-        res.redirect("/donor/index");
-});
-
 app.get("/donor/delete",
     setCurrentUser, isLoggedIn,
     async(req,res) => {
