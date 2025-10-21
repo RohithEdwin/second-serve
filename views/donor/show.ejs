@@ -1,0 +1,224 @@
+<% layout("/layouts/boilerplate") -%>
+    <div class="main-content">
+    <div class="content-card">
+        <h3>Orphanage Details</h3>
+        <ul>
+            <li><%= orphanage.username %></li>
+            <li><img src="<%= orphanage.image %>" alt="orphanage_image"></li>
+            <li><%= orphanage.description %></li>
+            <li><%= orphanage.phone %></li>
+            <li><%= orphanage.email %></li>
+            <li><%= orphanage.location %></li>
+             <li>Children Count:<%= orphanage.childrenCount %></li>
+        </ul>
+        <br>
+        <form method="GET" action="/<%= donor._id %>/donation/<%= orphanage._id %>">
+            <button>Donate Now</button>
+        </form>
+    </div>
+</div>
+
+<style>
+.main-content {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.content-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.content-card h3 {
+    color: #2d3748;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.content-card h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+.content-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.content-card li {
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #4a5568;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.content-card li:first-child {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d3748;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 20px;
+}
+
+.content-card li:last-child {
+    border-bottom: none;
+    font-weight: 600;
+    color: #2d3748;
+    background: #f0fff4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Image Styling */
+.content-card li img {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 10px auto;
+}
+
+.content-card li img:hover {
+    transform: scale(1.02);
+}
+
+/* Description Styling */
+.content-card li:nth-child(3) {
+    font-style: italic;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #5a67d8;
+    margin: 10px 0;
+}
+
+/* Contact Info Styling */
+.content-card li:nth-child(4),
+.content-card li:nth-child(5),
+.content-card li:nth-child(6) {
+    padding-left: 20px;
+    position: relative;
+}
+
+.content-card li:nth-child(4):before {
+    content: '📞';
+    position: absolute;
+    left: 0;
+}
+
+.content-card li:nth-child(5):before {
+    content: '📧';
+    position: absolute;
+    left: 0;
+}
+
+.content-card li:nth-child(6):before {
+    content: '📍';
+    position: absolute;
+    left: 0;
+}
+
+/* Button Styling */
+form {
+    margin-top: 30px;
+    text-align: center;
+}
+
+button {
+    padding: 16px 40px;
+    background: linear-gradient(135deg, #5a67d8, #38b2ac);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(90, 103, 216, 0.3);
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #4c51bf, #319795);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(90, 103, 216, 0.4);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    
+    .content-card {
+        padding: 30px 25px;
+    }
+    
+    .content-card h3 {
+        font-size: 28px;
+    }
+    
+    .content-card li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .content-card li img {
+        max-width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-card {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+    
+    .content-card h3 {
+        font-size: 24px;
+    }
+    
+    button {
+        width: 100%;
+        padding: 14px 20px;
+    }
+}
+</style>

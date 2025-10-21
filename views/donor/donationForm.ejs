@@ -1,0 +1,230 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="donation">
+    <h3>Donation</h3>
+    <p>Fill the form to initiate Donation!</p>
+    <form action="/<%= donor._id %>/donation" method="POST">
+
+        <input type="hidden" name="orphanageId" value="<%= orphanage._id %>">
+
+        <div class="form-group">
+            <label for="username">Name</label>
+            <input type="text" name="donor[username]" value="<%= donor.username %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="foodType">Food Items</label>
+            <textarea name="foodType" required placeholder="Enter Food items with Quantity (e.g., Rice - 5kg, Bread - 10 packets)"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="pickupAddress">Pickup Address</label>
+            <input type="text" name="pickupAddress" required placeholder="Enter the pickup address">
+        </div>
+
+        <div class="form-group">
+            <label for="pickupDate">Pickup Date</label>
+            <input type="date" name="pickupDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="pickupTime">Pickup Time</label>
+            <input type="time" name="pickupTime" required>
+        </div>
+
+        <div class="form-group">
+            <label for="donorphone">Phone Number</label>
+            <input type="text" name="donorPhone" value="<%= donor.phone %>" required>
+        </div>
+                
+        <button type="submit" class="donate-btn">Donate Now</button>
+    </form>
+</div>
+
+<style>
+.donation {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.donation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.donation h3 {
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 28px;
+    position: relative;
+    display: inline-block;
+}
+
+.donation h3:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+.donation p {
+    color: #718096;
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="hidden"],
+textarea {
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    color: #2d3748;
+    font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #5a67d8;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+}
+
+input[type="hidden"] {
+    display: none;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Date and Time Input Styling */
+input[type="date"],
+input[type="time"] {
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+.donate-btn {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #5a67d8, #38b2ac);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 6px 20px rgba(90, 103, 216, 0.3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.donate-btn:hover {
+    background: linear-gradient(135deg, #4c51bf, #319795);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(90, 103, 216, 0.4);
+}
+
+.donate-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .donation {
+        margin: 20px;
+        padding: 30px 25px;
+    }
+    
+    .donation h3 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .donation {
+        margin: 15px;
+        padding: 25px 20px;
+    }
+    
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    textarea {
+        padding: 12px 14px;
+    }
+    
+    .donate-btn {
+        padding: 14px 16px;
+    }
+}
+
+/* Focus styles for better accessibility */
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #5a67d8;
+    outline-offset: 2px;
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: #a0aec0;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #a0aec0;
+}
+
+::-ms-input-placeholder {
+    color: #a0aec0;
+}
+</style>

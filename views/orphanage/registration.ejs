@@ -1,0 +1,177 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="verification">
+    <h3>Orphanage Verification</h3>
+    <p>Enter all the details and submit to complete verification process!</p>
+    <form action="/orphanage/verification" method="POST">
+        <div class="form-group">
+            <label for="username">Name</label>
+            <input type="text" name="username" value="<%= orphanage.username %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" required placeholder="Tell us about your orphanage"><%= orphanage.description %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="text" name="image" value="<%= orphanage.image %>">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="<%= orphanage.email %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" name="phone" value="<%= orphanage.phone %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" name="address" required placeholder="Enter the address" value="<%= orphanage.address %>">
+        </div>
+
+        <div class="form-group">
+            <label for="childrenCount">Children Count</label>
+            <input type="number" name="childrenCount" required placeholder="Enter the number of children" value="<%= orphanage.childrenCount %>">
+        </div>
+                
+        <button type="submit" class="verify-btn">Verify</button>
+    </form>
+<div>
+
+<style>
+  .verification {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.verification h3 {
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 28px;
+    position: relative;
+    display: inline-block;
+}
+
+.verification h3:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+.verification p {
+    color: #718096;
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    color: #2d3748;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #5a67d8;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Button Styles */
+.verify-btn {
+    padding: 16px 20px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(90, 103, 216, 0.3);
+}
+
+.verify-btn:hover {
+    background: linear-gradient(to right, #4c51bf, #319795);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(90, 103, 216, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .verification {
+        margin: 20px;
+        padding: 25px;
+    }
+    
+    .verification h3 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .verification {
+        margin: 15px;
+        padding: 20px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea {
+        padding: 12px 14px;
+    }
+}
+</style>

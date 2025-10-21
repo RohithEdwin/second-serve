@@ -1,0 +1,183 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="pending-donation">
+    <h1>Donation History</h1>
+    <% for(let donation of allDonations) { %>
+            <div class="card">
+                <div class="card-body">
+                    <% if(donation.orphanageId) { %>}
+                    <p><b><%= donation.orphanageId.username %></b></p>
+                    <% } else { %>
+                        <p>The orphanage account has been deleted.</p>
+                    <% } %>
+                    <p><%= donation.foodType %></p> 
+                    <p><%= donation.pickupAddress %></p>  
+                    <p><%= donation.pickupDate %></p>
+                    <p><%= donation.pickupTime %></p>
+                    <p><%= donation.donorPhone %></p> 
+                    <% if(donation.status == "received") { %>
+                    <p>DELIVERED</p>
+                    <% } %>
+                    <% if(donation.status == "pending") { %>
+                    <p>PENDING</p>
+                    <% } %>
+                </div>
+            </div>
+    <% } %>
+</div>
+
+<style>
+    .pending-donation {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pending-donation h1 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 32px;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.pending-donation h1:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+/* Single column layout with full width cards */
+.pending-donation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Full width rectangular cards */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.card-body p {
+    margin: 0;
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.card-body p b {
+    font-size: 18px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Status styling - full width at bottom */
+.card-body p:last-child {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Default status styling */
+.card-body p:last-child {
+    background: #e2e8f0;
+    color: #4a5568;
+    border-left: 6px solid #a0aec0;
+}
+
+/* Delivered status - Green */
+.card[data-status="delivered"],
+.card:has(p:last-child:contains("delivered")) {
+    border-left: 6px solid #48bb78;
+}
+
+.card-body p:last-child:contains("delivered") {
+    background: #f0fff4;
+    color: #2f855a;
+}
+
+/* Pending status - Orange/Yellow */
+.card[data-status="pending"],
+.card:has(p:last-child:contains("pending")) {
+    border-left: 6px solid #ed8936;
+}
+
+.card-body p:last-child:contains("pending") {
+    background: #fef5e7;
+    color: #dd6b20;
+}
+
+/* Remove other status styles and focus only on delivered and pending */
+.card[data-status="completed"],
+.card:has(p:last-child:contains("completed")),
+.card[data-status="accepted"],
+.card:has(p:last-child:contains("accepted")),
+.card[data-status="rejected"],
+.card:has(p:last-child:contains("rejected")) {
+    border-left: 6px solid #a0aec0;
+}
+
+.card-body p:last-child:contains("completed"),
+.card-body p:last-child:contains("accepted"),
+.card-body p:last-child:contains("rejected") {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .card-body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .pending-donation {
+        padding: 15px;
+    }
+    
+    .card-body {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .card-body p:last-child {
+        grid-column: 1;
+    }
+}
+</style>

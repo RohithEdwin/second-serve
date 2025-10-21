@@ -1,0 +1,146 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="edit">
+    <h3>Edit Profile</h3>
+    <form  method="POST" action="/donor/<%=donor._id%>">
+        <div class="form-group">
+            <label for="username">Name</label>
+            <input type="text" name="username" value="<%= donor.username %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="<%= donor.email %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" name="phone" value="<%= donor.phone %>" required>
+        </div>
+     
+        <button type="submit" class="edit-btn">Save Changes</button>
+    </form>
+<div>
+
+<style>
+  /* GLOBAL LAYOUT FIX - Add this first */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px 0 80px; /* Extra bottom padding to push footer down */
+}
+   /* Edit Form Styles */
+.edit {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.edit h3 {
+    color: #2d3748;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 28px;
+    position: relative;
+    display: inline-block;
+}
+
+.edit h3:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+.edit form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.edit .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.edit label {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.edit input[type="text"],
+.edit input[type="email"] {
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+    color: #2d3748;
+}
+
+.edit input[type="text"]:focus,
+.edit input[type="email"]:focus {
+    outline: none;
+    border-color: #5a67d8;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+}
+
+.edit .edit-btn {
+    padding: 16px 20px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.3);
+}
+
+.edit .edit-btn:hover {
+    background: linear-gradient(to right, #4c51bf, #319795);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(90, 103, 216, 0.4);
+}
+
+@media (max-width: 768px) {
+    .edit {
+        margin: 30px 20px;
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .edit {
+        margin: 20px 15px;
+        padding: 25px 20px;
+    }
+}
+</style>

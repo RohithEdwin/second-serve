@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Serve - Food Donation</title>
+</head>
+<body>
+    <h3>Login</h3>
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+                
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+                
+        <button type="submit" class="login-btn">Login</button>
+        <br>
+    <div>
+        <p>Want to Join as an Donor? <a href="/signup-donor">Click Here!</a></p>
+        <p>Want to Join as an Orphanage? <a href="/signup-org">Click Here!</a></p>
+    </div>
+</body>
+</html>
+
+<style>
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f7fe 0%, #e6f3ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 32px;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+        }
+
+        h3:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #5a67d8, #38b2ac);
+            border-radius: 2px;
+        }
+
+        form {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+        }
+
+        form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            color: #2d3748;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #5a67d8;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #5a67d8, #38b2ac);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 6px 20px rgba(90, 103, 216, 0.3);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #4c51bf, #319795);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(90, 103, 216, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(-1px);
+        }
+
+        div {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        p {
+            color: #718096;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        a {
+            color: #5a67d8;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #4c51bf;
+            text-decoration: underline;
+        }
+
+        /* Placeholder styling */
+        ::placeholder {
+            color: #a0aec0;
+            opacity: 1;
+        }
+
+        :-ms-input-placeholder {
+            color: #a0aec0;
+        }
+
+        ::-ms-input-placeholder {
+            color: #a0aec0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 30px 25px;
+            }
+            
+            h3 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 15px;
+            }
+            
+            form {
+                padding: 25px 20px;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                padding: 12px 14px;
+            }
+            
+            .login-btn {
+                padding: 14px 16px;
+            }
+        }
+</style>

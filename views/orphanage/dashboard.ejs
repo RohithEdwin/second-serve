@@ -1,0 +1,348 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="dashboard">
+    <div class="side-panel">
+        <h1>Orphanage Dashboard</h1>
+        
+        <div class="status-section">
+            <% if(currUser.status === "incomplete") { %>
+                <a href="/orphanage/verification" class="btn btn-primary" style="width: 100%; text-align: center; margin-bottom: 1rem;">Start Verification</a>
+                <p class="status-incomplete">Status: Verification Required</p>
+            <% } else if(currUser.status === "pending") { %>
+                <p class="status-pending">Verification in Progress</p>
+                <p style="color: var(--text-light); font-size: 0.9rem;">We're reviewing your application</p>
+            <% } else if(currUser.status === "verified") { %>
+                <p class="status-verified">✓ Account Verified</p>
+                <p style="color: var(--text-light); font-size: 0.9rem;">Ready to receive donations</p>
+            <% } else if(currUser.status === "rejected") { %>
+                <p class="status-rejected">Verification Rejected</p>
+                <a href="/orphanage/verification" class="btn btn-outline" style="width: 100%; text-align: center; margin-top: 0.5rem;">Try Again</a>
+            <% } %>
+        </div>
+
+        <div class="dashboard-nav">
+            <a href="/orphanage/donations-request">Donation Request</a>
+        </div>
+
+        <div class="dashboard-nav">
+            <a href="/orphanage/pending-donation">Pending Donations</a>
+        </div>
+
+        <div class="dashboard-nav">
+            <a href="/orphanage/donation-history">All Donations</a>
+        </div>
+
+        <div class="dashboard-nav">
+            <a href="/orphanage/edit">Edit Profile</a>
+        </div>
+        
+        <div class="dashboard-nav">
+            <form method="GET" action="/orphanage/delete">
+                <button style="border: none;">Delete Account</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard-body">
+        <div class="welcome-container">
+            <div class="welcome-icon">🏠</div>
+            <h2 class="welcome-title">Orphanage Dashboard</h2>
+            <p class="welcome-text">
+                Welcome to your dashboard. Select an option from the side panel to manage 
+                your orphanage profile, view donations, and update your information.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #5a67d8;
+            --primary-light: #c3dafe;
+            --secondary: #38b2ac;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+            --text: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f9f7fe;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f7fe 0%, #e6f3ff 100%);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .dashboard {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 30px;
+        }
+
+        /* Side Panel Styles */
+        .side-panel {
+            flex: 0 0 300px;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .side-panel h1 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 24px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Status Section */
+        .status-section {
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .status-incomplete {
+            color: var(--warning);
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .status-pending {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .status-verified {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .status-rejected {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* Dashboard Navigation */
+        .dashboard-nav {
+            margin-bottom: 15px;
+        }
+
+        .dashboard-nav a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+        }
+
+        .dashboard-nav form button {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+        }
+
+        .dashboard-nav a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+        }
+
+        .dashboard-nav form button:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 10px rgba(90, 103, 216, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(90, 103, 216, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Dashboard Body */
+        .dashboard-body {
+            flex: 1;
+        }
+
+        .welcome-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .welcome-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-title {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 32px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .welcome-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .welcome-text {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* Dashboard Stats */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-light), #e6fffa);
+            border-radius: var(--radius);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .dashboard {
+                flex-direction: column;
+            }
+            
+            .side-panel {
+                position: static;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .dashboard-nav a {
+                display: inline-block;
+                width: 48%;
+                margin-right: 2%;
+                text-align: center;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            
+            .dashboard-nav a:hover {
+                border-left: none;
+                border-bottom: 3px solid var(--primary);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-nav a {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-container {
+                padding: 25px 20px;
+            }
+        }
+</style>

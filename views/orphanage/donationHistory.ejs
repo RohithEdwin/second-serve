@@ -1,0 +1,186 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="pending-donation">
+    <h1>Donation History</h1>
+    <% for(let donation of allDonations) { %>
+            <div class="card">
+                <% if(donation.donorId || donation.status === "received") { %>
+                <div class="card-body">
+                    <% if(donation.donorId) { %>
+                        <p><b><%= donation.donorId.username %></b></p>
+                    <% } else { %>
+                        <p>The donor account has been deleted.</p>
+                    <% } %>
+                    <p><%= donation.foodType %></p> 
+                    <p><%= donation.pickupAddress %></p>  
+                    <p><%= donation.pickupDate %></p>
+                    <p><%= donation.pickupTime %></p>
+                    <p><%= donation.donorPhone %></p> 
+                    <p><%= donation.status %></p>
+                </div>
+                <% } %>
+            </div>
+    <% } %>
+</div>
+
+<style>
+   .pending-donation {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pending-donation h1 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 32px;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.pending-donation h1:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+/* Single column layout with full width cards */
+.pending-donation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Full width rectangular cards */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    width: 100%;
+    border-left: 6px solid #a0aec0; /* Default gray */
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.card-body p {
+    margin: 0;
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.card-body p b {
+    font-size: 18px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Status styling */
+.card-body p:last-child {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px;
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+/* Status color variations */
+.status-completed {
+    border-left: 6px solid #48bb78 !important;
+}
+
+.status-completed p:last-child {
+    background: #f0fff4 !important;
+    color: #2f855a !important;
+}
+
+.status-pending {
+    border-left: 6px solid #ed8936 !important;
+}
+
+.status-pending p:last-child {
+    background: #fef5e7 !important;
+    color: #dd6b20 !important;
+}
+
+.status-rejected {
+    border-left: 6px solid #f56565 !important;
+}
+
+.status-rejected p:last-child {
+    background: #fed7d7 !important;
+    color: #c53030 !important;
+}
+
+.status-accepted {
+    border-left: 6px solid #4299e1 !important;
+}
+
+.status-accepted p:last-child {
+    background: #ebf8ff !important;
+    color: #2b6cb0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .card-body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .pending-donation {
+        padding: 15px;
+    }
+    
+    .card-body {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .card-body p:last-child {
+        grid-column: 1;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const statusElement = card.querySelector('p:last-child');
+        if (statusElement) {
+            const status = statusElement.textContent.trim().toLowerCase();
+            card.classList.add('status-' + status);
+            statusElement.classList.add('status-' + status);
+        }
+    });
+});
+</script>

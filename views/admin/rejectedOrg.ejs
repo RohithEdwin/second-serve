@@ -1,0 +1,133 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="rejected-org">
+    <h3>Rejected Orphanages</h3>
+    <% for(let orphanage of allOrphanages) { %>
+        <% if(orphanage.status === "rejected") { %>
+            <div class="card">
+                <div class="card-img">
+                    <img src="<%= orphanage.image %>" alt="<%= orphanage.username %>">
+                </div>
+                <div class="card-body">
+                    <p><b><%= orphanage.username %></b></p>
+                    <p><%= orphanage.description %></p>  
+                    <p><%= orphanage.email %></p>  
+                    <p><%= orphanage.address %></p>
+                    <p><%= orphanage.location %></p>
+                    <p><%= orphanage.phone %></p>
+                    <p><%= orphanage.childrenCount %> children</p> 
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+<style>
+   .rejected-org {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.rejected-org h3 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 24px;
+    position: relative;
+    display: block;
+    width: 100%;
+    grid-column: 1 / -1; /* This makes the header span all columns */
+}
+
+.rejected-org h3:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #f56565, #ed8936);
+    border-radius: 2px;
+}
+
+/* Grid layout for 3 columns */
+.rejected-org {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Card styles - direct children of .rejected-org that are .card */
+.rejected-org > .card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.rejected-org > .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body p {
+    margin-bottom: 8px;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.card-body p b {
+    font-size: 18px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Make the first paragraph (username) stand out */
+.card-body p:first-of-type {
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .rejected-org {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .rejected-org {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+}
+</style>

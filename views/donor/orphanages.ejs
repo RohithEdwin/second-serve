@@ -1,0 +1,243 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="donor-dashboard">
+    <div class="sidebar">
+        <a href="/donor/index">Home</a>
+        <a href="/donor/donation-history">My Donations</a>
+        <a href="/donor/edit">Edit Profile</a>
+        <form method="GET" action="/donor/delete">
+            <button style="border: none;">Delete Account</button>
+        </form>
+    </div> 
+    
+    <div class="mainbody">
+        <div class="verified-org">
+            <% for(let orphanage of allOrphanages) { %>
+                <% if(orphanage.status === "verified") { %>
+                    <a href="/orphanage/<%=orphanage.id %>">
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="<%= orphanage.image %>" alt="<%= orphanage.username %>">
+                            </div>
+                            <div class="card-body">
+                                <span class="verified-badge">✓ Verified</span>
+                                <p><b><%= orphanage.username %></b></p>
+                                <p><%= orphanage.email %></p>
+                            </div>
+                        </div>
+                    </a>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<style>
+        .donor-dashboard {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 30px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f9f7fe 0%, #e6f3ff 100%);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    flex: 0 0 250px;
+    background: white;
+    border-radius: 16px;
+    padding: 25px 0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    margin: 5px 0;
+}
+
+.sidebar form button{
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    margin: 5px 0;
+}
+
+.sidebar a:hover {
+    background-color: #f8f9ff;
+    color: #5a67d8;
+    border-left: 4px solid #5a67d8;
+}
+
+.sidebar form button:hover {
+    background-color: #f8f9ff;
+    color: #5a67d8;
+    border-left: 4px solid #5a67d8;
+}
+
+/* Main Body Styles */
+.mainbody {
+    flex: 1;
+}
+
+.verified-org {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 25px;
+    height: 100%;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.verified-badge {
+    display: inline-block;
+    background: linear-gradient(to right, #48bb78, #38a169);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    align-self: flex-start;
+}
+
+.card-body p {
+    margin-bottom: 8px;
+}
+
+.card-body p b {
+    font-size: 18px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.card-body p:last-child {
+    color: #718096;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+/* Link Styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Empty State (if less than 6 orphanages) */
+.verified-org::after {
+    content: "";
+    grid-column: 1 / -1;
+    height: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .verified-org {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+    }
+}
+
+@media (max-width: 992px) {
+    .donor-dashboard {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .sidebar a {
+        display: inline-block;
+        width: 48%;
+        margin-right: 2%;
+        text-align: center;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+    
+    .sidebar a:hover {
+        border-left: none;
+        border-bottom: 3px solid #5a67d8;
+    }
+}
+
+@media (max-width: 768px) {
+    .verified-org {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
+    }
+    
+    .sidebar a {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .donor-dashboard {
+        padding: 15px;
+    }
+    
+    .verified-org {
+        gap: 20px;
+    }
+}
+</style>

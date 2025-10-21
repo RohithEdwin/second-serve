@@ -1,0 +1,167 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="pending-donation">
+    <h1>Pending Donations</h1>
+    <% for(let donation of allDonations) { %>
+        <% if(donation.status === "accepted") { %>
+            <div class="card">
+                <div class="card-body">
+                    <p><b><%= donation.donorId.username %></b></p>
+                    <p><%= donation.foodType %></p> 
+                    <p><%= donation.pickupAddress %></p>  
+                    <p><%= donation.pickupDate %></p>
+                    <p><%= donation.pickupTime %></p>
+                    <p><%= donation.donorPhone %></p> 
+                    <form action="/donation/received/<%=donation.id%>" method="GET">
+                        <button type="submit">Donation Received</button>
+                    </form>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+<style>
+    .pending-donation {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pending-donation h1 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 32px;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.pending-donation h1:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+/* Single column layout with full width cards */
+.pending-donation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Full width rectangular cards with accepted status styling */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    width: 100%;
+    border-left: 6px solid #4299e1; /* Blue for accepted status */
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.card-body p {
+    margin: 0;
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.card-body p b {
+    font-size: 18px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Status indicator - Since all are accepted, we'll add a visual indicator */
+.card-body::before {
+    content: "Status: Accepted";
+    display: block;
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px;
+    background: #ebf8ff;
+    color: #2b6cb0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+form {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(to right, #48bb78, #38a169);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(72, 187, 120, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(to right, #38a169, #2f855a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(72, 187, 120, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .card-body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .pending-donation {
+        padding: 15px;
+    }
+    
+    .card-body {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .card-body::before {
+        grid-column: 1;
+    }
+    
+    form {
+        grid-column: 1;
+    }
+}
+</style>

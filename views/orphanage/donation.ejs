@@ -1,0 +1,160 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="pending-donation">
+    <h1>Donation Request</h1>
+    <% for(let donation of allDonations) { %>
+        <% if(donation.status === "pending") { %>
+            <div class="card">
+                <% if(donation.donorId) { %>
+                    <div class="card-body">
+                        <p><b><%= donation.donorId.username %></b></p>
+                        <p><%= donation.foodType %></p> 
+                        <p><%= donation.pickupAddress %></p>  
+                        <p><%= donation.pickupDate %></p>
+                        <p><%= donation.pickupTime %></p>
+                        <p><%= donation.donorPhone %></p> 
+                        <form action="/donation/accept/<%=donation.id%>" method="GET">
+                            <button type="submit">Accept donation</button>
+                        </form>
+                        <form action="/donation/reject/<%=donation.id%>" method="GET">
+                            <button type="submit">Reject donation</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+
+<style>
+.pending-donation {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pending-donation h1 {
+    color: #2d3748;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 24px;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.pending-donation h1:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #5a67d8, #38b2ac);
+    border-radius: 2px;
+}
+
+/* Single column layout */
+.pending-donation {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Card styles */
+.card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-left: 4px solid #5a67d8;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-body p {
+    margin-bottom: 12px;
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.card-body p b {
+    font-size: 20px;
+    color: #2d3748;
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Form and button styles */
+.card-body form {
+    display: inline-block;
+    width: 48%;
+    margin-top: 20px;
+}
+
+.card-body form:first-of-type {
+    margin-right: 4%;
+}
+
+button {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+form:first-of-type button {
+    background: linear-gradient(to right, #48bb78, #38a169);
+    color: white;
+    box-shadow: 0 4px 10px rgba(72, 187, 120, 0.3);
+}
+
+form:first-of-type button:hover {
+    background: linear-gradient(to right, #38a169, #2f855a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(72, 187, 120, 0.4);
+}
+
+form:last-of-type button {
+    background: linear-gradient(to right, #f56565, #ed8936);
+    color: white;
+    box-shadow: 0 4px 10px rgba(245, 101, 101, 0.3);
+}
+
+form:last-of-type button:hover {
+    background: linear-gradient(to right, #e53e3e, #dd6b20);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(245, 101, 101, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .pending-donation {
+        padding: 15px;
+    }
+    
+    .card-body form {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 10px;
+    }
+    
+    .card-body form:first-of-type {
+        margin-right: 0;
+    }
+}
+</style>
